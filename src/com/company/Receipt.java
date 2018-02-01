@@ -1,9 +1,36 @@
 package com.company;
-
+import java.io.*;
 import java.util.Scanner;
 
 public class Receipt {
 
+    public static void checkTank() {
+        String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt";
+        String line = null;
+        try {
+            FileReader fileReader =
+                    new FileReader(fileName);
+
+            BufferedReader bufferedReader =
+                    new BufferedReader(fileReader);
+            System.out.println("\nGas Tank Inventory:");
+            while ((line = bufferedReader.readLine()) != null) {
+                System.out.println(line);
+            }
+            System.out.println("\n");
+            bufferedReader.close();
+    }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                    "Unable to open file '" +
+                            fileName + "'");
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error reading file '"
+                            + fileName + "'");
+        }
+    }
     public static Double payBefore(String gasType, double money){
         if (gasType.equals("Regular")){
             double gallons = money / 1.79;

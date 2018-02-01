@@ -35,7 +35,8 @@ public class Main {
             double money = Receipt.payAfter(gasType, gallons);
             Receipt.receipt(money);
         } else {
-            System.out.println("Cannot compute...");
+            Receipt.checkTank();
+//            System.out.println("Cannot compute...");
         }
         System.out.println("Thank you!");
     }
