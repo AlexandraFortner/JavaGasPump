@@ -28,12 +28,14 @@ public class Main {
             double money = reader.nextDouble();
             double gallons = Receipt.payBefore(gasType, money);
             Receipt.receipt(money);
+            Receipt.writeToSales(gasType, gallons, money);
         } else if (beforeOrAfter.equals("2")){
             System.out.println("You've chosen to Pay After!");
             System.out.println("\nHow many gallons would you like?\n-");
             double gallons = reader.nextDouble();
             double money = Receipt.payAfter(gasType, gallons);
             Receipt.receipt(money);
+            Receipt.writeToSales(gasType, gallons, money);
         } else {
             Receipt.checkTank();
 //            System.out.println("Cannot compute...");

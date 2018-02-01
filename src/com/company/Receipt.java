@@ -4,13 +4,35 @@ import java.util.Scanner;
 
 public class Receipt {
 
+    public static void writeToSales(String gasType, double gallons, double money) {
+        //Meant to write to Sales.txt. A summary of all past transactions.
+        String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/Sales.txt";
+        try {
+            FileWriter fileWriter =
+                    new FileWriter(fileName);
+
+            BufferedWriter bufferedWriter =
+                    new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(String.format("%s, %s, %s", gasType, gallons, money));
+            bufferedWriter.newLine();
+
+            bufferedWriter.close();
+        }
+        catch(IOException ex) {
+            System.out.println(
+                    "Error writing to file '"
+                            + fileName + "'");
+        }
+    }
+
     public static void checkTank() {
+        //Reads GasTank.txt. Reads the inventory and price of all gas types.
         String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt";
         String line = null;
         try {
             FileReader fileReader =
                     new FileReader(fileName);
-
             BufferedReader bufferedReader =
                     new BufferedReader(fileReader);
             System.out.println("\nGas Tank Inventory:");
@@ -32,6 +54,7 @@ public class Receipt {
         }
     }
     public static Double payBefore(String gasType, double money){
+        //For the pay before option. Customer pays before getting gas.
         if (gasType.equals("Regular")){
             double gallons = money / 1.79;
             System.out.println("\nYou\"ve purchased " + gallons + " gallons for " +
@@ -60,6 +83,7 @@ public class Receipt {
     }
 
     public static Double payAfter(String gasType, double gallons){
+        //For the pay after option. Customer pays after getting gas.
         if (gasType.equals("Regular")){
             double money = gallons * 1.79;
             System.out.println("\nYou\"ve purchased " + gallons + " gallons for " +
@@ -87,31 +111,33 @@ public class Receipt {
         }
     }
 
-        public static double StateSalesTax(double money){
-            double stateTax = 0.08;
-            return money * stateTax;
-        }
-
-        public static double CountySalesTax(double money){
-            double countyTax = 0.07;
-            return money * countyTax;
-        }
-
-        public static void receipt(double money){
-
-            double revenue = 0.0;
-            double inventory = 0.0;
-            System.out.println("\n___________________________________\n|\n|Original Price Of Gas:" +
-                    money);
-            double stateTaxes = StateSalesTax(money);
-            System.out.println("\n|+ State Tax:" + stateTaxes);
-            double countyTaxes = CountySalesTax(money);
-            System.out.println("\n|+ County Tax:" + countyTaxes);
-            double total = money + stateTaxes + countyTaxes;
-            System.out.println("\n|\n|Total:" + total);
-            System.out.println(
-                    "\n|__________________________________\n\nHere\"s your receipt! Thank you for shopping with us!\n\n"
-            );
+    public static double StateSalesTax(double money){
+        //Calculates the state sales tax. Works with CountySalesTax and receipt.
+        double stateTax = 0.08;
+        return money * stateTax;
     }
+
+    public static double CountySalesTax(double money){
+        //Calculates the county sales tax. Works with StateSalesTax and receipt.
+        double countyTax = 0.07;
+        return money * countyTax;
+    }
+
+    public static void receipt(double money){
+        //Calculates the total money owed. Works with CountySalesTax and StateSalesTax.
+        double revenue = 0.0;
+        double inventory = 0.0;
+        System.out.println("\n___________________________________\n|\n|Original Price Of Gas:" +
+                money);
+        double stateTaxes = StateSalesTax(money);
+        System.out.println("\n|+ State Tax:" + stateTaxes);
+        double countyTaxes = CountySalesTax(money);
+        System.out.println("\n|+ County Tax:" + countyTaxes);
+        double total = money + stateTaxes + countyTaxes;
+        System.out.println("\n|\n|Total:" + total);
+        System.out.println(
+                "\n|__________________________________\n\nHere\"s your receipt! Thank you for shopping with us!\n\n"
+        );
+}
 
 }
