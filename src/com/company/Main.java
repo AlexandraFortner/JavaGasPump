@@ -24,10 +24,10 @@ public class Main {
         String beforeOrAfter = reader.nextLine();
         if (beforeOrAfter.equals("1")){
             System.out.println("You've chosen to Pay Before!");
-//            System.out.println("\nHow much money would you like to spend?\n-");
-//            String gallons = reader.nextLine();
-//            payBefore(gasType, gallons);
-//            Receipt receipt = new Receipt(money);
+            System.out.println("\nHow much money would you like to spend?\n-");
+            double money = reader.nextDouble();
+            double gallons = Receipt.payBefore(gasType, money);
+            Receipt.receipt(money);
         } else if (beforeOrAfter.equals("2")){
             System.out.println("You've chosen to Pay After!");
             System.out.println("\nHow many gallons would you like?\n-");

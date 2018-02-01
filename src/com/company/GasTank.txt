@@ -1,0 +1,4 @@
+
+regular, 5000, 1.79
+mid-grade, 5000, 2.00
+premium, 5000, 3.00

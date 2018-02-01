@@ -4,6 +4,34 @@ import java.util.Scanner;
 
 public class Receipt {
 
+    public static Double payBefore(String gasType, double money){
+        if (gasType.equals("Regular")){
+            double gallons = money / 1.79;
+            System.out.println("\nYou\"ve purchased " + gallons + " gallons for " +
+                    money +
+                    " dollars.\n\nThank you for your business! Have a nice day!");
+            return gallons;
+        }
+        else if (gasType.equals("Mid-Grade")){
+            double gallons = money / 2.00;
+            System.out.println("\nYou\"ve purchased " + gallons + " gallons for " +
+                    money +
+                    " dollars.\n\nThank you for your business! Have a nice day!");
+            return gallons;
+        }
+        else if (gasType.equals("Premium")){
+            double gallons = money / 3.00;
+            System.out.println("\nYou\"ve purchased " + gallons + " gallons for " +
+                    money +
+                    " dollars.\n\nThank you for your business! Have a nice day!");
+            return gallons;
+        }
+        else{
+            System.out.println("Invalid Input.");
+            return null;
+        }
+    }
+
     public static Double payAfter(String gasType, double gallons){
         if (gasType.equals("Regular")){
             double money = gallons * 1.79;
