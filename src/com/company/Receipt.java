@@ -9,7 +9,7 @@ public class Receipt {
         String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/Sales.txt";
         try {
             FileWriter fileWriter =
-                    new FileWriter(fileName);
+                    new FileWriter(fileName, true);
 
             BufferedWriter bufferedWriter =
                     new BufferedWriter(fileWriter);
