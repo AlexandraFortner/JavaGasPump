@@ -22,6 +22,21 @@ public class Main {
         }
         System.out.println("Would you like to:\n1. Pay Before\n2. Pay After");
         String beforeOrAfter = reader.nextLine();
+        if (beforeOrAfter.equals("1")){
+            System.out.println("You've chosen to Pay Before!");
+//            System.out.println("\nHow much money would you like to spend?\n-");
+//            String gallons = reader.nextLine();
+//            payBefore(gasType, gallons);
+//            Receipt receipt = new Receipt(money);
+        } else if (beforeOrAfter.equals("2")){
+            System.out.println("You've chosen to Pay After!");
+            System.out.println("\nHow many gallons would you like?\n-");
+            double gallons = reader.nextDouble();
+            double money = Receipt.payAfter(gasType, gallons);
+            Receipt.receipt(money);
+        } else {
+            System.out.println("Cannot compute...");
+        }
         System.out.println("Thank you!");
     }
 }
