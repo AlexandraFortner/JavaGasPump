@@ -1,10 +1,11 @@
 package com.company;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner reader = new Scanner(System.in);
         System.out.println("What type of gas would you like?\n[R]egular [M]id-Grade [P]remium");
         String gasType = reader.nextLine();
@@ -29,6 +30,7 @@ public class Main {
             double gallons = Receipt.payBefore(gasType, money);
             Receipt.receipt(money);
             Receipt.writeToSales(gasType, gallons, money);
+            Receipt.checkTank(gasType, gallons);
         } else if (beforeOrAfter.equals("2")){
             System.out.println("You've chosen to Pay After!");
             System.out.println("\nHow many gallons would you like?\n-");
@@ -36,9 +38,9 @@ public class Main {
             double money = Receipt.payAfter(gasType, gallons);
             Receipt.receipt(money);
             Receipt.writeToSales(gasType, gallons, money);
+            Receipt.checkTank(gasType, gallons);
         } else {
-            Receipt.checkTank();
-//            System.out.println("Cannot compute...");
+            System.out.println("Cannot compute...");
         }
         System.out.println("Thank you!");
     }

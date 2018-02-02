@@ -1,10 +1,58 @@
 package com.company;
 import java.io.*;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Receipt {
 
-    public static void writeToSales(String gasType, double gallons, double money) {
+    public static void overwriteGasTank(String regular, String midgrade, String premium) throws IOException{
+        FileWriter writer = new FileWriter("/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt");
+        writer.write(regular);
+        writer.write("\n"+midgrade);
+        writer.write("\n"+premium);
+        writer.close();
+    }
+
+//    public static void overwriteGasTank(String gasType, double gallons) {
+//        //Meant to overwrite GasTank.txt. Subtracts the gallons that are taken by customers.
+//        String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt";
+//        try {
+//            FileWriter fileWriter =
+//                    new FileWriter(fileName);
+//            BufferedReader bufferedReader =
+//                    new BufferedReader(fileReader);
+//            BufferedWriter bufferedWriter =
+//                    new BufferedWriter(fileWriter);
+//            String str = bufferedReader.readLine();
+//            String[] s = str.split(",");
+//            if (gasType.equals("Regular")){
+//                double regularGallons = s.split(",")[1];
+//                System.out.println(regularGallons);
+//                double newGallons = gallons -= regularGallons;
+//                bufferedWriter.write(String.format("%s, %s, %s", "Regular", newGallons, "1.79"));
+//            }
+//            else if (gasType.equals("Mid-Grade")){
+//                double midgradeGallons = s.split(",")[4];
+//                double newGallons = gallons -= midgradeGallons;
+//                bufferedWriter.write(String.format("%s, %s, %s", "Mid-Grade", gallons, "2.00"));
+//            }
+//            else if (gasType.equals("Premium")){
+//                double premiumGallons = s.split(",")[7];
+//                double newGallons = gallons -= premiumGallons;
+//                bufferedWriter.write(String.format("%s, %s, %s", "Premium", gallons, "3.00"));
+//            }
+//            bufferedWriter.newLine();
+//            bufferedWriter.close();
+//        }
+//        catch(IOException ex) {
+//            System.out.println(
+//                    "Error writing to file '"
+//                            + fileName + "'");
+//        }
+//    }
+
+    public static void writeToSales(String gasType, double gallons, double money) throws IOException{
         //Meant to write to Sales.txt. A summary of all past transactions.
         String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/Sales.txt";
         try {
@@ -26,32 +74,36 @@ public class Receipt {
         }
     }
 
-    public static void checkTank() {
+    public static void checkTank(String gasType, double gallons) throws IOException {
         //Reads GasTank.txt. Reads the inventory and price of all gas types.
-        String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt";
-        String line = null;
-        try {
-            FileReader fileReader =
-                    new FileReader(fileName);
-            BufferedReader bufferedReader =
-                    new BufferedReader(fileReader);
-            System.out.println("\nGas Tank Inventory:");
-            while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+        File fileName =new File("/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt");
+        Scanner input = new Scanner(fileName);
+        while (input.hasNextLine()){
+            String reg = input.nextLine();
+            String mid = input.nextLine();
+            String prem = input.nextLine();
+            if (reg.startsWith(gasType)){
+                ArrayList regList = new ArrayList<String>(Arrays.asList(reg.split(", ")));
+                double total_gallons = Double.parseDouble(regList.get(1).toString());
+                double new_total = total_gallons -= gallons;
+                String new_gallon = Double.toString(new_total);
+                reg = reg.replace(regList.get(1).toString(), new_gallon);
+            }else if (mid.startsWith(gasType)){
+                ArrayList midList = new ArrayList<String>(Arrays.asList(mid.split(", ")));
+                double total_gallons = Double.parseDouble(midList.get(1).toString());
+                double new_total = total_gallons -= gallons;
+                String new_gallon = Double.toString(new_total);
+                mid = mid.replace(midList.get(1).toString(), new_gallon);
+            }else if (prem.startsWith(gasType)){
+                ArrayList premList = new ArrayList<String>(Arrays.asList(prem.split(", ")));
+                double total_gallons = Double.parseDouble(premList.get(1).toString());
+                double new_total = total_gallons -= gallons;
+                String new_gallon = Double.toString(new_total);
+                prem = prem.replace(premList.get(1).toString(), new_gallon);
             }
-            System.out.println("\n");
-            bufferedReader.close();
-    }
-        catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
+            overwriteGasTank(reg, mid, prem);
         }
-        catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '"
-                            + fileName + "'");
-        }
+        input.close();
     }
     public static Double payBefore(String gasType, double money){
         //For the pay before option. Customer pays before getting gas.
@@ -136,7 +188,7 @@ public class Receipt {
         double total = money + stateTaxes + countyTaxes;
         System.out.println("\n|\n|Total:" + total);
         System.out.println(
-                "\n|__________________________________\n\nHere\"s your receipt! Thank you for shopping with us!\n\n"
+                "\n|__________________________________\n\nHere\'s your receipt! Thank you for shopping with us!\n\n"
         );
 }
 

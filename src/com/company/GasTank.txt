@@ -1,3 +1,3 @@
-Regular, 5000, 1.79
-Mid-grade, 5000, 2.00
+Regular, 4993.296089385475, 1.79
+Mid-Grade, 5000, 2.00
 Premium, 5000, 3.00
