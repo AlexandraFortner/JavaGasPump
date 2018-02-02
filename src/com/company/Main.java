@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner reader = new Scanner(System.in);
-        System.out.println("What type of gas would you like?\n[R]egular [M]id-Grade [P]remium");
+        System.out.println("What type of gas would you like?\n[R]egular [M]id-Grade [P]remium\nOtherwise [C]heck total sales.");
         String gasType = reader.nextLine();
         if (gasType.equals("r")){
             gasType = "Regular";
@@ -18,7 +18,11 @@ public class Main {
         }else if (gasType.equals("p")){
             gasType = "Premium";
             System.out.println("You've chosen Premium!");
-        } else {
+        }else if (gasType.equals("c")){
+            Admin.addTransactions();
+            System.exit(0);
+
+        }else {
             System.out.println("Cannot compute...");
         }
         System.out.println("Would you like to:\n1. Pay Before\n2. Pay After");

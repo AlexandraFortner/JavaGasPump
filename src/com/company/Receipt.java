@@ -62,7 +62,7 @@ public class Receipt {
             BufferedWriter bufferedWriter =
                     new BufferedWriter(fileWriter);
 
-            bufferedWriter.write(String.format("%s, %s, %s", gasType, gallons, money));
+            bufferedWriter.write(String.format("%s, %s, %s", gasType, money, gallons));
             bufferedWriter.newLine();
 
             bufferedWriter.close();
@@ -84,22 +84,22 @@ public class Receipt {
             String prem = input.nextLine();
             if (reg.startsWith(gasType)){
                 ArrayList regList = new ArrayList<String>(Arrays.asList(reg.split(", ")));
-                double total_gallons = Double.parseDouble(regList.get(1).toString());
-                double new_total = total_gallons -= gallons;
-                String new_gallon = Double.toString(new_total);
-                reg = reg.replace(regList.get(1).toString(), new_gallon);
+                double totalGallons = Double.parseDouble(regList.get(1).toString());
+                double newTotal = totalGallons -= gallons;
+                String newGallons = Double.toString(newTotal);
+                reg = reg.replace(regList.get(1).toString(), newGallons);
             }else if (mid.startsWith(gasType)){
                 ArrayList midList = new ArrayList<String>(Arrays.asList(mid.split(", ")));
-                double total_gallons = Double.parseDouble(midList.get(1).toString());
-                double new_total = total_gallons -= gallons;
-                String new_gallon = Double.toString(new_total);
-                mid = mid.replace(midList.get(1).toString(), new_gallon);
+                double totalGallons = Double.parseDouble(midList.get(1).toString());
+                double newTotal = totalGallons -= gallons;
+                String newGallons = Double.toString(newTotal);
+                mid = mid.replace(midList.get(1).toString(), newGallons);
             }else if (prem.startsWith(gasType)){
                 ArrayList premList = new ArrayList<String>(Arrays.asList(prem.split(", ")));
-                double total_gallons = Double.parseDouble(premList.get(1).toString());
-                double new_total = total_gallons -= gallons;
-                String new_gallon = Double.toString(new_total);
-                prem = prem.replace(premList.get(1).toString(), new_gallon);
+                double totalGallons = Double.parseDouble(premList.get(1).toString());
+                double newTotal = totalGallons -= gallons;
+                String newGallons = Double.toString(newTotal);
+                prem = prem.replace(premList.get(1).toString(), newGallons);
             }
             overwriteGasTank(reg, mid, prem);
         }
