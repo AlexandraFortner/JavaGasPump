@@ -9,48 +9,10 @@ public class Receipt {
     public static void overwriteGasTank(String regular, String midgrade, String premium) throws IOException{
         FileWriter writer = new FileWriter("/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt");
         writer.write(regular);
-        writer.write("\n"+midgrade);
-        writer.write("\n"+premium);
+        writer.write("\n" + midgrade);
+        writer.write("\n" + premium);
         writer.close();
     }
-
-//    public static void overwriteGasTank(String gasType, double gallons) {
-//        //Meant to overwrite GasTank.txt. Subtracts the gallons that are taken by customers.
-//        String fileName = "/home/basecamp/IdeaProjects/GasPump/src/com/company/GasTank.txt";
-//        try {
-//            FileWriter fileWriter =
-//                    new FileWriter(fileName);
-//            BufferedReader bufferedReader =
-//                    new BufferedReader(fileReader);
-//            BufferedWriter bufferedWriter =
-//                    new BufferedWriter(fileWriter);
-//            String str = bufferedReader.readLine();
-//            String[] s = str.split(",");
-//            if (gasType.equals("Regular")){
-//                double regularGallons = s.split(",")[1];
-//                System.out.println(regularGallons);
-//                double newGallons = gallons -= regularGallons;
-//                bufferedWriter.write(String.format("%s, %s, %s", "Regular", newGallons, "1.79"));
-//            }
-//            else if (gasType.equals("Mid-Grade")){
-//                double midgradeGallons = s.split(",")[4];
-//                double newGallons = gallons -= midgradeGallons;
-//                bufferedWriter.write(String.format("%s, %s, %s", "Mid-Grade", gallons, "2.00"));
-//            }
-//            else if (gasType.equals("Premium")){
-//                double premiumGallons = s.split(",")[7];
-//                double newGallons = gallons -= premiumGallons;
-//                bufferedWriter.write(String.format("%s, %s, %s", "Premium", gallons, "3.00"));
-//            }
-//            bufferedWriter.newLine();
-//            bufferedWriter.close();
-//        }
-//        catch(IOException ex) {
-//            System.out.println(
-//                    "Error writing to file '"
-//                            + fileName + "'");
-//        }
-//    }
 
     public static void writeToSales(String gasType, double gallons, double money) throws IOException{
         //Meant to write to Sales.txt. A summary of all past transactions.
@@ -182,14 +144,13 @@ public class Receipt {
         System.out.println("\n___________________________________\n|\n|Original Price Of Gas:" +
                 money);
         double stateTaxes = StateSalesTax(money);
-        System.out.println("\n|+ State Tax:" + stateTaxes);
+        System.out.println("|+ State Tax:" + stateTaxes);
         double countyTaxes = CountySalesTax(money);
-        System.out.println("\n|+ County Tax:" + countyTaxes);
+        System.out.println("|+ County Tax:" + countyTaxes);
         double total = money + stateTaxes + countyTaxes;
-        System.out.println("\n|\n|Total:" + total);
+        System.out.println("|\n|Total:" + total);
         System.out.println(
-                "\n|__________________________________\n\nHere\'s your receipt! Thank you for shopping with us!\n\n"
+                "|__________________________________\n\nHere\'s your receipt! Thank you for shopping with us!\n\n"
         );
-}
-
+    }
 }
